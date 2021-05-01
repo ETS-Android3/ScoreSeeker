@@ -27,11 +27,11 @@
             <LinearLayout
                 android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
-                android:layout_height="140dp"
+                android:layout_height="120dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:gravity="center_horizontal">
+                android:gravity="center|bottom">
 
 
                 <ImageView
@@ -39,7 +39,6 @@
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:layout_marginStart="32dp"
-                    android:layout_marginTop="68dp"
                     android:layout_marginEnd="32dp"
                     android:src="@drawable/dummy1" />
 
@@ -47,7 +46,6 @@
                     android:id="@+id/score1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="68dp"
                     android:layout_marginEnd="24dp"
                     android:text="0"
                     android:textColor="@color/black"
@@ -57,17 +55,15 @@
                     android:id="@+id/divider"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="60dp"
                     android:layout_marginEnd="28dp"
                     android:text="-"
                     android:textColor="@color/black"
-                    android:textSize="48sp" />
+                    android:textSize="48sp"/>
 
                 <TextView
                     android:id="@+id/score2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="68dp"
                     android:layout_marginEnd="32dp"
                     android:text="0"
                     android:textColor="@color/black"
@@ -77,23 +73,55 @@
                     android:id="@+id/logo2"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    android:layout_marginTop="68dp"
                     android:layout_marginEnd="32dp"
                     android:src="@drawable/dummy1" />
             </LinearLayout>
 
-
-            <TextView
-                android:id="@+id/dateMatch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="12 April 2021"
-                android:textColor="@color/black"
-                android:textSize="12sp"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+                app:layout_constraintVertical_bias="0.0">
+
+                <TextView
+                    android:id="@+id/nameTeam1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:layout_marginEnd="50dp"
+                    android:text="Manchester\nUnited"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/dateMatch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="12 April 2021"
+                    android:textColor="@color/black"
+                    android:layout_gravity="bottom"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/nameTeam2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:layout_gravity="top"
+                    android:text="Manchester\nUnited"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>

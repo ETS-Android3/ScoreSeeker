@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".MainActivity">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
+        android:id="@+id/matchCardView"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_marginStart="16dp"
@@ -93,8 +94,8 @@
                     android:id="@+id/nameTeam1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="43dp"
                     android:layout_gravity="top"
-                    android:layout_marginEnd="50dp"
                     android:text="Manchester\nUnited"
                     android:textAlignment="center"
                     android:textColor="@color/black"
@@ -113,7 +114,7 @@
                     android:id="@+id/nameTeam2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="50dp"
+                    android:layout_marginStart="43dp"
                     android:layout_gravity="top"
                     android:text="Manchester\nUnited"
                     android:textAlignment="center"
@@ -139,7 +140,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+        app:layout_constraintTop_toBottomOf="@+id/matchCardView" />
 
 
     <androidx.recyclerview.widget.RecyclerView

@@ -4,12 +4,22 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class DetailActivity extends AppCompatActivity {
+import maes.tech.intentanim.CustomIntent;
+
+ public class DetailActivity extends AppCompatActivity {
+
+    @Override
+    public void finish() {
+        super.finish();
+        CustomIntent.customType(this, "right-to-left");
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         getSupportActionBar().hide();
+
+
     }
 }

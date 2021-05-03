@@ -94,11 +94,12 @@
                     android:id="@+id/nameTeam1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="43dp"
+                    android:layout_marginEnd="45dp"
                     android:layout_gravity="top"
                     android:text="Manchester\nUnited"
                     android:textAlignment="center"
                     android:textColor="@color/black"
+                    android:fontFamily="@font/montserrat_regular"
                     android:textSize="12sp" />
 
                 <TextView
@@ -108,16 +109,18 @@
                     android:text="12 April 2021"
                     android:textColor="@color/black"
                     android:layout_gravity="bottom"
+                    android:fontFamily="@font/montserrat_regular"
                     android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/nameTeam2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="43dp"
+                    android:layout_marginStart="45dp"
                     android:layout_gravity="top"
                     android:text="Manchester\nUnited"
                     android:textAlignment="center"
+                    android:fontFamily="@font/montserrat_regular"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
             </LinearLayout>

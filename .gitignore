@@ -105,3 +105,4 @@ lint/tmp/
 *.hprof
 
 app/src/main/res/values/key.xml
+values/key.xml

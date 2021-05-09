@@ -106,7 +106,7 @@
                     android:id="@+id/dateMatch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="12 April 2021"
+                    android:text="19 April 2021"
                     android:textColor="@color/black"
                     android:layout_gravity="bottom"
                     android:fontFamily="@font/montserrat_regular"

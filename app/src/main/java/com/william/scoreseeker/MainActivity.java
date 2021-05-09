@@ -54,14 +54,13 @@ public class MainActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // TODO: Handle error
-
+                        //
                     }
                 }) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
-                headers.put("X-Auth-Token", getString(R.string.apiKey));
+                headers.put("X-Auth-Token", BuildConfig.ApiKey);
                 return headers;
             }
         };

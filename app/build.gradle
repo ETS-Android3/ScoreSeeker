@@ -2,6 +2,9 @@ plugins {
     id 'com.android.application'
 }
 
+def API_KEY = '"' + ApiKey + '"' ?: '"Api Key Not Found"'
+def STRING = 'String'
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
@@ -14,6 +17,11 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        each { type ->
+            type.buildConfigField STRING, 'ApiKey', API_KEY
+        }
+
     }
 
     buildTypes {

@@ -104,5 +104,5 @@ lint/tmp/
 # Android Profiling
 *.hprof
 
-app/src/main/res/values/key.xml
-values/key.xml
+# API KEY
+/app/src/main/res/values/key.xml

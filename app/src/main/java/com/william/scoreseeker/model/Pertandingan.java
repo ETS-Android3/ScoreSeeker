@@ -1,10 +1,28 @@
 package com.william.scoreseeker.model;
 
 public class Pertandingan {
+    private String id;
     private String timKandang;
     private String timTandang;
     private String skorKandang;
     private String skorTandang;
+    private String tanggal;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getTanggal() {
+        return tanggal;
+    }
+
+    public void setTanggal(String tanggal) {
+        this.tanggal = tanggal;
+    }
 
     public String getTimKandang() {
         return timKandang;

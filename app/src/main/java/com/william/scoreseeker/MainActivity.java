@@ -46,22 +46,31 @@ import maes.tech.intentanim.CustomIntent;
 
 public class MainActivity extends AppCompatActivity {
    RequestQueue queue;
-
+   Pertandingan p = new Pertandingan();
+   LoadingDialog loadingDialog = new LoadingDialog(MainActivity.this);
    @Override
    protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
       setContentView(R.layout.activity_main);
       getSupportActionBar().hide();
 
+
+      loadingDialog.startLoading();
+
       queue = Volley.newRequestQueue(this);
       getFirstData(queue);
-
-
 
       CardView matchCardView = findViewById(R.id.matchCardView);
       matchCardView.setOnClickListener(e -> {
          Intent i = new Intent(MainActivity.this, DetailActivity.class);
+         i.putExtra("id", p.getId());
          startActivity(i);
+         CustomIntent.customType(MainActivity.this, "left-to-right");
+      });
+
+      ImageView klasmenBanner = findViewById(R.id.klasmen_banner);
+      klasmenBanner.setOnClickListener(e -> {
+         startActivity(new Intent(MainActivity.this, KlasmenActivity.class));
          CustomIntent.customType(MainActivity.this, "left-to-right");
       });
    }
@@ -98,15 +107,16 @@ public class MainActivity extends AppCompatActivity {
                     score = single.getJSONObject("score");
                     fulltime = score.getJSONObject("fullTime");
 
-                    Pertandingan p = new Pertandingan();
+
                     p.setTimKandang((String) ht.get("name"));
                     p.setTimTandang((String) at.get("name"));
                     p.setSkorKandang(String.valueOf(fulltime.get("homeTeam")));
                     p.setSkorTandang(String.valueOf(fulltime.get("awayTeam")));
+                    p.setId(String.valueOf(single.get("id")));
                     String[] rawDate = single.getString("utcDate").substring(0, 19).replace(":", "-").replace("T", "-").split("-");
 
                     LocalDateTime temp = LocalDateTime.of(Integer.parseInt(rawDate[0]), Integer.parseInt(rawDate[1]), Integer.parseInt(rawDate[2]), Integer.parseInt(rawDate[3]), Integer.parseInt(rawDate[4]));
-                    DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd MMMM yyyy, HH:mm");
+                    DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd MMMM yyyy");
                     String formattedDate = temp.format(myFormatObj);
                     p.setTanggal(formattedDate);
 
@@ -125,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
                     tanggal.setText((CharSequence) p.getTanggal());
                     getLogo(queue, logo1, String.valueOf(ht.get("id")));
                     getLogo(queue, logo2, String.valueOf(at.get("id")));
-
+                    loadingDialog.endDialog();
                  } catch (JSONException e) {
                     e.printStackTrace();
                  }

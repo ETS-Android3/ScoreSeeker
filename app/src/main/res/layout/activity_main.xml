@@ -40,15 +40,13 @@
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:layout_marginStart="32dp"
-                    android:layout_marginEnd="32dp"
-                    android:src="@drawable/dummy1" />
+                    android:layout_marginEnd="32dp" />
 
                 <TextView
                     android:id="@+id/score1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="24dp"
-                    android:text="0"
                     android:textColor="@color/black"
                     android:textSize="38sp" />
 
@@ -66,7 +64,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="32dp"
-                    android:text="0"
                     android:textColor="@color/black"
                     android:textSize="38sp" />
 
@@ -74,8 +71,7 @@
                     android:id="@+id/logo2"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    android:layout_marginEnd="32dp"
-                    android:src="@drawable/dummy1" />
+                    android:layout_marginEnd="32dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -92,11 +88,10 @@
 
                 <TextView
                     android:id="@+id/nameTeam1"
-                    android:layout_width="80dp"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="45dp"
+                    android:layout_marginEnd="28dp"
                     android:layout_gravity="top"
-                    android:text="Manchester\nUnited"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:fontFamily="@font/montserrat_regular"
@@ -114,11 +109,10 @@
 
                 <TextView
                     android:id="@+id/nameTeam2"
-                    android:layout_width="80dp"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="45dp"
+                    android:layout_marginStart="28dp"
                     android:layout_gravity="top"
-                    android:text="Manchester\nUnited"
                     android:textAlignment="center"
                     android:fontFamily="@font/montserrat_regular"
                     android:textColor="@color/black"
@@ -168,6 +162,7 @@
     </androidx.recyclerview.widget.RecyclerView>
 
     <ImageView
+        android:id="@+id/klasmen_banner"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_marginStart="16dp"

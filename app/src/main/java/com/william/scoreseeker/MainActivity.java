@@ -2,11 +2,10 @@ package com.william.scoreseeker;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.PictureDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,28 +17,24 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou;
 import com.william.scoreseeker.model.Pertandingan;
+import com.william.scoreseeker.util.CustomAdapter;
+import com.william.scoreseeker.util.LoadingDialog;
+import com.william.scoreseeker.util.MyRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URI;
-import java.net.URL;
-import java.net.URLConnection;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import maes.tech.intentanim.CustomIntent;
@@ -48,17 +43,69 @@ public class MainActivity extends AppCompatActivity {
    RequestQueue queue;
    Pertandingan p = new Pertandingan();
    LoadingDialog loadingDialog = new LoadingDialog(MainActivity.this);
+
+   private ArrayList<Pertandingan> matchList = new ArrayList<>();
+   private RecyclerView recyclerView;
+   private CustomAdapter recyclerViewAdapter;
+
+
    @Override
    protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
       setContentView(R.layout.activity_main);
       getSupportActionBar().hide();
-
-
       loadingDialog.startLoading();
+      queue = MyRequest.getInstance(MainActivity.this).getRequestQueue();
 
-      queue = Volley.newRequestQueue(this);
+
+      recyclerView = findViewById(R.id.recyclerView);
+      recyclerView.setHasFixedSize(true);
+      recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
+      String now = getDate();
+      String yesterday = getYesterday();
+      String url = "https://api.football-data.org/v2/matches/?competitions=PL,SA,PD,FL1&status=FINISHED&dateFrom=" + yesterday + "&dateTo=" + now;
+      JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+              (Request.Method.GET, url, null, response -> {
+                 JSONArray fetchArray;
+                 try {
+                    fetchArray = response.getJSONArray("matches");
+                    for (int i = 1; i < fetchArray.length(); i++) {
+                       JSONObject s = fetchArray.getJSONObject(i);
+                       Pertandingan p = new Pertandingan();
+                       p.setTimKandang((String) s.getJSONObject("homeTeam").get("name"));
+                       p.setTimTandang((String) s.getJSONObject("awayTeam").get("name"));
+                       p.setSkorKandang(String.valueOf(s.getJSONObject("score").getJSONObject("fullTime").get("homeTeam")));
+                       p.setSkorTandang(String.valueOf(s.getJSONObject("score").getJSONObject("fullTime").get("awayTeam")));
+                       p.setId(String.valueOf(s.get("id")));
+                       String[] rawDate = s.getString("utcDate").substring(0, 19).replace(":", "-").replace("T", "-").split("-");
+                       LocalDateTime temp = LocalDateTime.of(Integer.parseInt(rawDate[0]), Integer.parseInt(rawDate[1]), Integer.parseInt(rawDate[2]), Integer.parseInt(rawDate[3]), Integer.parseInt(rawDate[4]));
+                       DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd MMMM yyyy");
+                       String formattedDate = temp.format(myFormatObj);
+                       p.setTanggal(formattedDate);
+                       matchList.add(p);
+                    }
+                    Log.i("Aww", "onCreate: " + matchList.size());
+                    recyclerViewAdapter = new CustomAdapter(this, matchList);
+                    recyclerView.setAdapter(recyclerViewAdapter);
+                    recyclerViewAdapter.notifyDataSetChanged();
+                 } catch (JSONException e) {
+                    e.printStackTrace();
+                 }
+              }, error -> {
+                 Toast.makeText(MainActivity.this, "Cannot Fetch Data From API", Toast.LENGTH_SHORT).show();
+              }) {
+         @Override
+         public Map<String, String> getHeaders() throws AuthFailureError {
+            HashMap<String, String> headers = new HashMap<String, String>();
+            headers.put("X-Auth-Token", getString(R.string.key));
+            return headers;
+         }
+      };
+      queue.add(jsonObjectRequest);
       getFirstData(queue);
+
 
       CardView matchCardView = findViewById(R.id.matchCardView);
       matchCardView.setOnClickListener(e -> {
@@ -83,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
 
    private String getYesterday() {
       Calendar yesterday = Calendar.getInstance();
-      yesterday.add(Calendar.DATE, -1);
+      yesterday.add(Calendar.DATE, -3);
       DateFormat dtf = new SimpleDateFormat("yyyy-MM-dd");
       return dtf.format(yesterday.getTime());
    }
@@ -96,17 +143,19 @@ public class MainActivity extends AppCompatActivity {
 
       JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
               (Request.Method.GET, url, null, response -> {
-                 JSONArray fetchArray;
+                 JSONArray fetchArray = null;
                  JSONObject single, ht, at, score, fulltime;
                  try {
                     fetchArray = response.getJSONArray("matches");
+
+
+
                     single = fetchArray.getJSONObject(0);
                     ht = single.getJSONObject("homeTeam");
                     at = single.getJSONObject("awayTeam");
 
                     score = single.getJSONObject("score");
                     fulltime = score.getJSONObject("fullTime");
-
 
                     p.setTimKandang((String) ht.get("name"));
                     p.setTimTandang((String) at.get("name"));
@@ -135,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
                     tanggal.setText((CharSequence) p.getTanggal());
                     getLogo(queue, logo1, String.valueOf(ht.get("id")));
                     getLogo(queue, logo2, String.valueOf(at.get("id")));
-                    loadingDialog.endDialog();
+
                  } catch (JSONException e) {
                     e.printStackTrace();
                  }
@@ -149,6 +198,7 @@ public class MainActivity extends AppCompatActivity {
             return headers;
          }
       };
+
       queue.add(jsonObjectRequest);
    }
 
@@ -158,6 +208,7 @@ public class MainActivity extends AppCompatActivity {
       JsonObjectRequest logoRequest = new JsonObjectRequest(Request.Method.GET, url, null, response -> {
          try {
             GlideToVectorYou.init().with(this).load(Uri.parse((String) response.get("crestUrl")),view);
+            loadingDialog.endDialog();
          } catch (JSONException e) {
             e.printStackTrace();
          }

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="10dp"
+        android:backgroundTint="#D0D0D0">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="15dp"
+            >
+            <TextView
+                android:id="@+id/tim1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="abc"
+                android:textColor="@color/black"
+                android:textSize="18dp"/>
+            <TextView
+                android:layout_below="@+id/tim1"
+                android:id="@+id/tim2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="abc"
+                android:textColor="@color/black"
+                android:textSize="18dp"/>
+            <TextView
+                android:id="@+id/skor1"
+                android:layout_alignParentEnd="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="@color/black"
+                android:textSize="18dp"/>
+            <TextView
+                android:layout_below="@+id/tim1"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/skor2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:textColor="@color/black"
+                android:textSize="18dp"/>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

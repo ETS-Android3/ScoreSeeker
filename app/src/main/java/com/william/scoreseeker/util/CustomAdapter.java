@@ -55,7 +55,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
       viewHolder.skor2.setText(p.getSkorTandang());
       Uri uri1 = Uri.parse("https://crests.football-data.org/"+p.getIdKandang()+".svg");
       Uri uri2 = Uri.parse("https://crests.football-data.org/"+p.getIdTandang()+".svg");
-
       GlideToVectorYou.init().with(context).load(uri1,viewHolder.logo1);
       GlideToVectorYou.init().with(context).load(uri2,viewHolder.logo2);
    }

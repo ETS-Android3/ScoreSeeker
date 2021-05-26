@@ -26,8 +26,6 @@ public class Pertandingan {
         this.idTandang = idTandang;
     }
 
-
-
     public String getId() {
         return id;
     }

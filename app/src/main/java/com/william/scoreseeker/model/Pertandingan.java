@@ -2,11 +2,31 @@ package com.william.scoreseeker.model;
 
 public class Pertandingan {
     private String id;
+    private String idKandang;
+    private String idTandang;
     private String timKandang;
     private String timTandang;
     private String skorKandang;
     private String skorTandang;
     private String tanggal;
+
+    public String getIdKandang() {
+        return idKandang;
+    }
+
+    public void setIdKandang(String idKandang) {
+        this.idKandang = idKandang;
+    }
+
+    public String getIdTandang() {
+        return idTandang;
+    }
+
+    public void setIdTandang(String idTandang) {
+        this.idTandang = idTandang;
+    }
+
+
 
     public String getId() {
         return id;

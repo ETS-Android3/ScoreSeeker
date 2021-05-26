@@ -48,20 +48,19 @@ public class MainActivity extends AppCompatActivity {
    private RecyclerView recyclerView;
    private CustomAdapter recyclerViewAdapter;
 
-
    @Override
    protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
       setContentView(R.layout.activity_main);
       getSupportActionBar().hide();
       loadingDialog.startLoading();
-      queue = MyRequest.getInstance(MainActivity.this).getRequestQueue();
 
+      queue = MyRequest.getInstance(MainActivity.this).getRequestQueue();
+      getFirstData(queue);
 
       recyclerView = findViewById(R.id.recyclerView);
       recyclerView.setHasFixedSize(true);
       recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
 
       String now = getDate();
       String yesterday = getYesterday();
@@ -79,22 +78,24 @@ public class MainActivity extends AppCompatActivity {
                        p.setSkorKandang(String.valueOf(s.getJSONObject("score").getJSONObject("fullTime").get("homeTeam")));
                        p.setSkorTandang(String.valueOf(s.getJSONObject("score").getJSONObject("fullTime").get("awayTeam")));
                        p.setId(String.valueOf(s.get("id")));
+                       p.setIdKandang(String.valueOf(s.getJSONObject("homeTeam").get("id")));
+                       p.setIdTandang(String.valueOf(s.getJSONObject("awayTeam").get("id")));
                        String[] rawDate = s.getString("utcDate").substring(0, 19).replace(":", "-").replace("T", "-").split("-");
                        LocalDateTime temp = LocalDateTime.of(Integer.parseInt(rawDate[0]), Integer.parseInt(rawDate[1]), Integer.parseInt(rawDate[2]), Integer.parseInt(rawDate[3]), Integer.parseInt(rawDate[4]));
                        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd MMMM yyyy");
                        String formattedDate = temp.format(myFormatObj);
+                       Log.i("LOL", "onCreate: " + p.getIdKandang() + p.getIdTandang());
                        p.setTanggal(formattedDate);
                        matchList.add(p);
                     }
-                    Log.i("Aww", "onCreate: " + matchList.size());
-                    recyclerViewAdapter = new CustomAdapter(this, matchList);
+                    recyclerViewAdapter = new CustomAdapter(MainActivity.this, matchList);
                     recyclerView.setAdapter(recyclerViewAdapter);
                     recyclerViewAdapter.notifyDataSetChanged();
                  } catch (JSONException e) {
                     e.printStackTrace();
                  }
               }, error -> {
-                 Toast.makeText(MainActivity.this, "Cannot Fetch Data From API", Toast.LENGTH_SHORT).show();
+                 Toast.makeText(MainActivity.this, "Can't Fetch Data From API", Toast.LENGTH_SHORT).show();
               }) {
          @Override
          public Map<String, String> getHeaders() throws AuthFailureError {
@@ -104,8 +105,6 @@ public class MainActivity extends AppCompatActivity {
          }
       };
       queue.add(jsonObjectRequest);
-      getFirstData(queue);
-
 
       CardView matchCardView = findViewById(R.id.matchCardView);
       matchCardView.setOnClickListener(e -> {
@@ -147,9 +146,6 @@ public class MainActivity extends AppCompatActivity {
                  JSONObject single, ht, at, score, fulltime;
                  try {
                     fetchArray = response.getJSONArray("matches");
-
-
-
                     single = fetchArray.getJSONObject(0);
                     ht = single.getJSONObject("homeTeam");
                     at = single.getJSONObject("awayTeam");
@@ -184,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
                     tanggal.setText((CharSequence) p.getTanggal());
                     getLogo(queue, logo1, String.valueOf(ht.get("id")));
                     getLogo(queue, logo2, String.valueOf(at.get("id")));
-
+                    loadingDialog.endDialog();
                  } catch (JSONException e) {
                     e.printStackTrace();
                  }
@@ -202,18 +198,16 @@ public class MainActivity extends AppCompatActivity {
       queue.add(jsonObjectRequest);
    }
 
-   private void getLogo(RequestQueue queue, ImageView view, String id) {
+   public void getLogo(RequestQueue queue, ImageView view, String id) {
       String url = "https://api.football-data.org/v2/teams/" + id;
-
       JsonObjectRequest logoRequest = new JsonObjectRequest(Request.Method.GET, url, null, response -> {
          try {
             GlideToVectorYou.init().with(this).load(Uri.parse((String) response.get("crestUrl")),view);
-            loadingDialog.endDialog();
          } catch (JSONException e) {
             e.printStackTrace();
          }
       }, error -> {
-         Toast.makeText(MainActivity.this, "Cannot Fetch Logo From API", Toast.LENGTH_SHORT).show();
+
       }) {
          @Override
          public Map<String, String> getHeaders() throws AuthFailureError {

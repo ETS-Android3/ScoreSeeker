@@ -12,7 +12,7 @@ import com.android.volley.toolbox.Volley;
 public class MyRequest {
    private static MyRequest instance;
    private RequestQueue requestQueue;
-   private ImageLoader imageLoader;
+   private final ImageLoader imageLoader;
    private static Context ctx;
 
    private MyRequest(Context context) {

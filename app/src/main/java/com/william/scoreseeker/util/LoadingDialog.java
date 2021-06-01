@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import com.william.scoreseeker.R;
 
 public class LoadingDialog {
-   private Activity activity;
+   private final Activity activity;
    private AlertDialog dialog;
 
    public LoadingDialog(Activity myActivity) {
@@ -17,7 +17,7 @@ public class LoadingDialog {
       AlertDialog.Builder builder = new AlertDialog.Builder(activity);
       LayoutInflater inflater = activity.getLayoutInflater();
       builder.setView(inflater.inflate(R.layout.dialog, null));
-      builder.setCancelable(true);
+      builder.setCancelable(false);
       dialog = builder.create();
       dialog.show();
    }

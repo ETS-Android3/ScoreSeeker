@@ -31,7 +31,7 @@ import java.util.Map;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> {
    private Context context;
-   private List<Pertandingan> matchList;
+   private final List<Pertandingan> matchList;
    private LayoutInflater inflater;
 
    public CustomAdapter(Context c, List<Pertandingan> matchList) {
@@ -66,8 +66,12 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
 
 
    public class ViewHolder extends RecyclerView.ViewHolder {
-      private TextView tim1, tim2, skor1, skor2;
-      private ImageView logo1, logo2;
+      private final TextView tim1;
+      private final TextView tim2;
+      private final TextView skor1;
+      private final TextView skor2;
+      private final ImageView logo1;
+      private final ImageView logo2;
       public ViewHolder(View view, Context ctx) {
          super(view);
          context = ctx;

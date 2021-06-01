@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
    Pertandingan p = new Pertandingan();
    LoadingDialog loadingDialog = new LoadingDialog(MainActivity.this);
 
-   private ArrayList<Pertandingan> matchList = new ArrayList<>();
+   private final ArrayList<Pertandingan> matchList = new ArrayList<>();
    private RecyclerView recyclerView;
    private CustomAdapter recyclerViewAdapter;
 
@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
    }
    private String getYesterday() {
       Calendar yesterday = Calendar.getInstance();
-      yesterday.add(Calendar.DATE, -3);
+      yesterday.add(Calendar.DATE, -10);
       DateFormat dtf = new SimpleDateFormat("yyyy-MM-dd");
       return dtf.format(yesterday.getTime());
    }
@@ -114,19 +114,19 @@ public class MainActivity extends AppCompatActivity {
                     String formattedDate = temp.format(myFormatObj);
                     p.setTanggal(formattedDate);
 
-                    final TextView nameTeam1 = (TextView) findViewById(R.id.nameTeam1);
-                    final TextView nameTeam2 = (TextView) findViewById(R.id.nameTeam2);
-                    final TextView skor1 = (TextView) findViewById(R.id.score1);
-                    final TextView skor2 = (TextView) findViewById(R.id.score2);
-                    final TextView tanggal = (TextView) findViewById(R.id.dateMatch);
-                    final ImageView logo1 = (ImageView) findViewById(R.id.logo1);
-                    final ImageView logo2 = (ImageView) findViewById(R.id.logo2);
+                    final TextView nameTeam1 = findViewById(R.id.nameTeam1);
+                    final TextView nameTeam2 = findViewById(R.id.nameTeam2);
+                    final TextView skor1 = findViewById(R.id.score1);
+                    final TextView skor2 = findViewById(R.id.score2);
+                    final TextView tanggal = findViewById(R.id.dateMatch);
+                    final ImageView logo1 = findViewById(R.id.logo1);
+                    final ImageView logo2 = findViewById(R.id.logo2);
 
                     nameTeam1.setText(p.getTimKandang());
                     nameTeam2.setText(p.getTimTandang());
                     skor1.setText(p.getSkorKandang());
                     skor2.setText(p.getSkorTandang());
-                    tanggal.setText((CharSequence) p.getTanggal());
+                    tanggal.setText(p.getTanggal());
 
                     Uri uri1 = Uri.parse("https://crests.football-data.org/"+p.getIdKandang()+".svg");
                     Uri uri2 = Uri.parse("https://crests.football-data.org/"+p.getIdTandang()+".svg");
@@ -174,7 +174,6 @@ public class MainActivity extends AppCompatActivity {
                        LocalDateTime temp = LocalDateTime.of(Integer.parseInt(rawDate[0]), Integer.parseInt(rawDate[1]), Integer.parseInt(rawDate[2]), Integer.parseInt(rawDate[3]), Integer.parseInt(rawDate[4]));
                        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd MMMM yyyy");
                        String formattedDate = temp.format(myFormatObj);
-                       Log.i("LOL", "onCreate: " + p.getIdKandang() + p.getIdTandang());
                        p.setTanggal(formattedDate);
                        matchList.add(p);
                     }

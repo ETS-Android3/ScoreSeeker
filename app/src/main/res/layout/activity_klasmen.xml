@@ -68,6 +68,13 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
+                    android:id="@+id/logoKlas0"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginBottom="10dp"
+                    android:src="@drawable/dummy1" />
+
+                <ImageView
                     android:id="@+id/logoKlas1"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
@@ -90,13 +97,6 @@
 
                 <ImageView
                     android:id="@+id/logoKlas4"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_marginBottom="10dp"
-                    android:src="@drawable/dummy1" />
-
-                <ImageView
-                    android:id="@+id/logoKlas5"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:src="@drawable/dummy1" />
@@ -123,6 +123,7 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/mp0"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="23dp"
@@ -132,6 +133,7 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/mp1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="23dp"
@@ -141,6 +143,7 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/mp2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="23dp"
@@ -150,6 +153,7 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/mp3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="23dp"
@@ -159,6 +163,7 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/mp4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_regular"
@@ -188,6 +193,7 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/win0"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="23dp"
@@ -197,6 +203,7 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/win1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="23dp"
@@ -206,6 +213,7 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/win2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="23dp"
@@ -215,6 +223,7 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/win3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="23dp"
@@ -224,6 +233,7 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/win4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_regular"
@@ -253,6 +263,7 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/draw0"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="23dp"
@@ -262,6 +273,7 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/draw1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="23dp"
@@ -271,6 +283,7 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/draw2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="23dp"
@@ -280,6 +293,7 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/draw3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="23dp"
@@ -289,6 +303,7 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/draw4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_regular"
@@ -311,12 +326,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_regular"
-                    android:text="Pts"
+                    android:text="L"
                     android:layout_marginBottom="23dp"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/lose0"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="23dp"
@@ -326,6 +342,7 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/lose1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="23dp"
@@ -335,6 +352,7 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/lose2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="23dp"
@@ -344,6 +362,7 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/lose3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="23dp"
@@ -353,6 +372,7 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/lose4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_regular"
@@ -376,12 +396,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_regular"
-                    android:text="L"
+                    android:text="Pts"
                     android:layout_marginBottom="23dp"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/pts0"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="23dp"
@@ -391,6 +412,7 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/pts1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="23dp"
@@ -400,6 +422,7 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/pts2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="23dp"
@@ -409,6 +432,7 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/pts3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="23dp"
@@ -418,6 +442,7 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/pts4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_regular"

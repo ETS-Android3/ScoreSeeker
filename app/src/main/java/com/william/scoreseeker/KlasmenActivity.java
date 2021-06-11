@@ -1,6 +1,7 @@
 package com.william.scoreseeker;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,6 +14,9 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou;
+import com.william.scoreseeker.model.Klasmen;
+import com.william.scoreseeker.model.Pertandingan;
+import com.william.scoreseeker.util.CustomAdapter;
 import com.william.scoreseeker.util.MyRequest;
 
 import org.json.JSONArray;
@@ -20,12 +24,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import maes.tech.intentanim.CustomIntent;
 
 public class KlasmenActivity extends AppCompatActivity {
+    private RecyclerView recyclerView;
+    private CustomAdapter recyclerViewAdapter;
+    private final ArrayList<Klasmen> klasmenList = new ArrayList<>();
     @Override
     public void finish() {
         super.finish();
@@ -37,23 +45,24 @@ public class KlasmenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_klasmen);
         getSupportActionBar().hide();
-        getKlasmenData();
+        getKlasmenData("2021");
+
 
     }
 
-    private void getKlasmenData() {
-        ImageView[] logos = new ImageView[5];
-        TextView[] detail = new TextView[5];
-        TextView[] win = new TextView[5];
-        TextView[] draw = new TextView[5];
-        TextView[] lose = new TextView[5];
-        TextView[] pts = new TextView[5];
+    private void getKlasmenData(String id) {
+        ImageView[] logos = new ImageView[20];
+        TextView[] detail = new TextView[20];
+        TextView[] win = new TextView[20];
+        TextView[] draw = new TextView[20];
+        TextView[] lose = new TextView[20];
+        TextView[] pts = new TextView[20];
 
-        String url = "https://api.football-data.org/v2/competitions/2021/standings";
+        String url = "https://api.football-data.org/v2/competitions/"+ id +"/standings";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, response -> {
             try {
                 JSONArray teamData = response.getJSONArray("standings").getJSONObject(0).getJSONArray("table");
-                for (int i = 0; i < 5; i++) {
+                for (int i = 0; i < teamData.length(); i++) {
                     logos[i] = (ImageView) findViewById(getResources().getIdentifier( MessageFormat.format("logoKlas{0}", i), "id", getPackageName()));
                     detail[i] = (TextView) findViewById(getResources().getIdentifier( MessageFormat.format("mp{0}", i), "id", getPackageName()));
                     win[i] = (TextView) findViewById(getResources().getIdentifier( MessageFormat.format("win{0}", i), "id", getPackageName()));
@@ -70,6 +79,7 @@ public class KlasmenActivity extends AppCompatActivity {
 
                     Uri uri = Uri.parse(teamData.getJSONObject(i).getJSONObject("team").getString("crestUrl"));
                     GlideToVectorYou.init().with(this).load(uri, logos[i]);
+
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

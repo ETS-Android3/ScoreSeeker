@@ -73,13 +73,16 @@ public class MainActivity extends AppCompatActivity {
    }
 
    private String getDate() {
-      DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-      LocalDateTime now = LocalDateTime.now();
-      return dtf.format(now);
+//      DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//      LocalDateTime now = LocalDateTime.now();
+      Calendar now = Calendar.getInstance();
+      now.add(Calendar.DATE, -30);
+      DateFormat dtf = new SimpleDateFormat("yyyy-MM-dd");
+      return dtf.format(now.getTime());
    }
    private String getYesterday() {
       Calendar yesterday = Calendar.getInstance();
-      yesterday.add(Calendar.DATE, -10);
+     yesterday.add(Calendar.DATE, -40);
       DateFormat dtf = new SimpleDateFormat("yyyy-MM-dd");
       return dtf.format(yesterday.getTime());
    }

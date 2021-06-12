@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/group2"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar">
+        <activity android:name=".KlasmenMenuActivity"></activity>
         <activity android:name=".KlasmenActivity" />
         <activity
             android:name=".DetailActivity"

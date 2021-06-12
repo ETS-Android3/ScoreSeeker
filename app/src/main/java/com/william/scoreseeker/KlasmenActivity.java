@@ -45,7 +45,8 @@ public class KlasmenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_klasmen);
         getSupportActionBar().hide();
-        getKlasmenData("2021");
+        String idKlasmen = getIntent().getStringExtra("id");
+        getKlasmenData(idKlasmen);
 
 
     }

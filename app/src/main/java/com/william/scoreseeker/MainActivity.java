@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
       ImageView klasmenBanner = findViewById(R.id.klasmen_banner);
       klasmenBanner.setOnClickListener(e -> {
-         startActivity(new Intent(MainActivity.this, KlasmenActivity.class));
+         startActivity(new Intent(MainActivity.this, KlasmenMenuActivity.class));
          CustomIntent.customType(MainActivity.this, "left-to-right");
       });
    }

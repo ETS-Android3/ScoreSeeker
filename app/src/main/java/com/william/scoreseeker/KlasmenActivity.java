@@ -1,6 +1,7 @@
 package com.william.scoreseeker;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.net.Uri;
@@ -46,9 +47,23 @@ public class KlasmenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_klasmen);
         getSupportActionBar().hide();
         String idKlasmen = getIntent().getStringExtra("id");
+        changeColor(idKlasmen);
         getKlasmenData(idKlasmen);
 
 
+    }
+
+    private void changeColor(String id) {
+        CardView card = findViewById(R.id.card1);
+        if (id == "2021") {
+            card.setCardBackgroundColor(getResources().getColor(R.color.premier));
+        } else if (id == "2019") {
+            card.setCardBackgroundColor(getResources().getColor(R.color.laliga));
+        } else if (id == "2014") {
+
+        } else if (id == "2015") {
+
+        }
     }
 
     private void getKlasmenData(String id) {

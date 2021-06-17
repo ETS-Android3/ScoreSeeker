@@ -2,6 +2,7 @@ package com.william.scoreseeker.util;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
@@ -18,6 +20,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou;
+import com.william.scoreseeker.DetailActivity;
 import com.william.scoreseeker.KlasmenActivity;
 import com.william.scoreseeker.MainActivity;
 import com.william.scoreseeker.R;
@@ -28,6 +31,8 @@ import org.json.JSONException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import maes.tech.intentanim.CustomIntent;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> {
    private Context context;
@@ -57,6 +62,12 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
       Uri uri2 = Uri.parse("https://crests.football-data.org/"+p.getIdTandang()+".svg");
       GlideToVectorYou.init().with(context).load(uri1,viewHolder.logo1);
       GlideToVectorYou.init().with(context).load(uri2,viewHolder.logo2);
+      viewHolder.card.setOnClickListener(e -> {
+         Intent i = new Intent(context, DetailActivity.class);
+         i.putExtra("id", p.getId());
+         context.startActivity(i);
+         CustomIntent.customType(context, "left-to-right");
+      });
    }
 
    @Override
@@ -72,6 +83,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
       private final TextView skor2;
       private final ImageView logo1;
       private final ImageView logo2;
+      private final CardView card;
       public ViewHolder(View view, Context ctx) {
          super(view);
          context = ctx;
@@ -81,26 +93,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
          skor2 = view.findViewById(R.id.skor2);
          logo1 = view.findViewById(R.id.logo1);
          logo2 = view.findViewById(R.id.logo2);
+         card = view.findViewById(R.id.card_view);
       }
-   }
-   public void getLogo(ImageView view, String id) {
-      String url = "https://api.football-data.org/v2/teams/" + id;
-      JsonObjectRequest logoRequest = new JsonObjectRequest(Request.Method.GET, url, null, response -> {
-         try {
-            GlideToVectorYou.init().with(context).load(Uri.parse((String) response.get("crestUrl")),view);
-         } catch (JSONException e) {
-            e.printStackTrace();
-         }
-      }, error -> {
-         
-      }) {
-         @Override
-         public Map<String, String> getHeaders() throws AuthFailureError {
-            HashMap<String, String> headers = new HashMap<String, String>();
-            headers.put("X-Auth-Token", context.getString(R.string.key));
-            return headers;
-         }
-      };
-      MyRequest.getInstance(context).addToRequestQueue(logoRequest);
    }
 }

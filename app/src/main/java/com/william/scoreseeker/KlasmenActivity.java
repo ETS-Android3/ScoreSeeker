@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -35,6 +36,7 @@ public class KlasmenActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private CustomAdapter recyclerViewAdapter;
     private final ArrayList<Klasmen> klasmenList = new ArrayList<>();
+    CardView card;
     @Override
     public void finish() {
         super.finish();
@@ -47,22 +49,26 @@ public class KlasmenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_klasmen);
         getSupportActionBar().hide();
         String idKlasmen = getIntent().getStringExtra("id");
+        card = findViewById(R.id.card1);
+        text =
         changeColor(idKlasmen);
         getKlasmenData(idKlasmen);
-
-
     }
 
     private void changeColor(String id) {
-        CardView card = findViewById(R.id.card1);
-        if (id == "2021") {
-            card.setCardBackgroundColor(getResources().getColor(R.color.premier));
-        } else if (id == "2019") {
-            card.setCardBackgroundColor(getResources().getColor(R.color.laliga));
-        } else if (id == "2014") {
-
-        } else if (id == "2015") {
-
+        switch (id) {
+            case "2021":
+                card.setCardBackgroundColor(getResources().getColor(R.color.premier));
+                break;
+            case "2014":
+                card.setCardBackgroundColor(getResources().getColor(R.color.laliga));
+                break;
+            case "2015":
+                card.setCardBackgroundColor(getResources().getColor(R.color.ligue1));
+                break;
+            case "2019":
+                card.setCardBackgroundColor(getResources().getColor(R.color.seriea));
+                break;
         }
     }
 

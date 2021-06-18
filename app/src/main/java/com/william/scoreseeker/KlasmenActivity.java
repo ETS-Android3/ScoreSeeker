@@ -36,7 +36,8 @@ public class KlasmenActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private CustomAdapter recyclerViewAdapter;
     private final ArrayList<Klasmen> klasmenList = new ArrayList<>();
-    CardView card;
+    private CardView card;
+    private TextView namaLiga;
     @Override
     public void finish() {
         super.finish();
@@ -50,7 +51,7 @@ public class KlasmenActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         String idKlasmen = getIntent().getStringExtra("id");
         card = findViewById(R.id.card1);
-        text =
+        namaLiga = findViewById(R.id.textView4);
         changeColor(idKlasmen);
         getKlasmenData(idKlasmen);
     }
@@ -59,15 +60,19 @@ public class KlasmenActivity extends AppCompatActivity {
         switch (id) {
             case "2021":
                 card.setCardBackgroundColor(getResources().getColor(R.color.premier));
+                namaLiga.setText("Premier League");
                 break;
             case "2014":
                 card.setCardBackgroundColor(getResources().getColor(R.color.laliga));
+                namaLiga.setText("La Liga Spanyol");
                 break;
             case "2015":
                 card.setCardBackgroundColor(getResources().getColor(R.color.ligue1));
+                namaLiga.setText("Ligue 1 Perancis");
                 break;
             case "2019":
                 card.setCardBackgroundColor(getResources().getColor(R.color.seriea));
+                namaLiga.setText("Serie A Itali");
                 break;
         }
     }

@@ -113,18 +113,14 @@
                         android:textSize="12sp" />
                     <TextView
                         android:id="@+id/venue"
-                        android:layout_width="wrap_content"
+                        android:layout_width="120dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom|center"
+                        android:textAlignment="center"
                         android:fontFamily="@font/montserrat_regular"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
-
                 </LinearLayout>
-
-
-
-
                 <TextView
                     android:id="@+id/nameTeam2"
                     android:layout_width="90dp"
@@ -237,8 +233,7 @@
                         android:layout_marginBottom="10dp"
                         android:textSize="14sp"
                         android:textColor="@color/black"
-                        android:fontFamily="@font/montserrat_medium"
-                        android:text="Premier League" />
+                        android:fontFamily="@font/montserrat_medium" />
 
                 </LinearLayout>
                 <LinearLayout

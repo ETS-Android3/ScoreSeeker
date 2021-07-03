@@ -1,5 +1,6 @@
 package com.william.scoreseeker;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
@@ -47,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
    private RecyclerView recyclerView;
    private CustomAdapter recyclerViewAdapter;
 
+   @RequiresApi(api = Build.VERSION_CODES.O)
    @Override
    protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
@@ -75,23 +78,29 @@ public class MainActivity extends AppCompatActivity {
    private String getDate() {
 //      DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 //      LocalDateTime now = LocalDateTime.now();
+      // Waktu di set permanen sementara
       Calendar now = Calendar.getInstance();
-      now.add(Calendar.DATE, -30);
+      now.set(Calendar.YEAR, 2021);
+      now.set(Calendar.MONTH, 3);
+      now.set(Calendar.DATE, 4);
       DateFormat dtf = new SimpleDateFormat("yyyy-MM-dd");
       return dtf.format(now.getTime());
    }
    private String getYesterday() {
       Calendar yesterday = Calendar.getInstance();
-     yesterday.add(Calendar.DATE, -40);
+      yesterday.set(Calendar.YEAR, 2021);
+      yesterday.set(Calendar.MONTH, 2);
+      yesterday.set(Calendar.DATE, 30);
       DateFormat dtf = new SimpleDateFormat("yyyy-MM-dd");
       return dtf.format(yesterday.getTime());
    }
 
+   @RequiresApi(api = Build.VERSION_CODES.O)
    private void getFirstData() {
       String now = getDate();
       String yesterday = getYesterday();
       String url = "https://api.football-data.org/v2/matches/?competitions=PL,SA,PD,FL1&status=FINISHED&dateFrom=" + yesterday + "&dateTo=" + now;
-
+      Log.d("DATE", "getFirstData: " + url);
       JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
               (Request.Method.GET, url, null, response -> {
                  JSONArray fetchArray = null;
@@ -151,6 +160,7 @@ public class MainActivity extends AppCompatActivity {
       };
       MyRequest.getInstance(this).addToRequestQueue(jsonObjectRequest);
    }
+   @RequiresApi(api = Build.VERSION_CODES.O)
    private void getMatchData() {
       recyclerView = findViewById(R.id.recyclerView);
       recyclerView.setHasFixedSize(true);
